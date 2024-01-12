@@ -1,72 +1,77 @@
 # Bharat_Intern
 #App development 
-from tkinter import *
 
-# Create the main window
-root = Tk()
-root.title("Floral To-Do List")
-root.configure(bg="#F5EFE8")
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YourTo-Do List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5; /* Light pastel background color */
+    }
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      background-color: #ffffff; /* Light pastel container background color */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #ff7eb9; /* Pastel pink heading color */
+    }
+    #taskInput {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #e0e0e0; /* Light pastel border color */
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    .taskItem {
+      background-color: #fff3e6; /* Light pastel task item background color */
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      background-color: #a7e9af; /* Light pastel button background color */
+      color: #555; /* Pastel button text color */
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .btn:hover {
+      background-color: #86cf96; /* Light pastel button background color on hover */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Your To-Do List !</h1>
+    <input type="text" id="taskInput" placeholder="Add a new task...">
+    <button onclick="addTask()" class="btn">Add Task</button>
+    <div id="taskList"></div>
+  </div>
 
-# Create the task list
-tasks = []
-
-# Define functions for adding, editing, and deleting tasks
-def add_task():
-    task = entry.get()
-    if task != "":
-        tasks.append(task)
-        update_listbox()
-
-def edit_task():
-    selected_task = listbox.curselection()
-    if selected_task:
-        task = entry.get()
-        tasks[selected_task[0]] = task
-        update_listbox()
-
-def delete_task():
-    selected_task = listbox.curselection()
-    if selected_task:
-        tasks.pop(selected_task[0])
-        update_listbox()
-
-# Define function for updating the listbox
-def update_listbox():
-    listbox.delete(0, END)
-    for task in tasks:
-        listbox.insert(END, task)
-
-# Create the user interface
-frame1 = Frame(root, bg="#F5EFE8")
-frame1.pack(pady=10)
-
-label = Label(frame1, text="Add a task:", bg="#F5EFE8", font=("Arial", 12))
-label.pack(side=LEFT, padx=10)
-
-entry = Entry(frame1, width=30, font=("Arial", 12))
-entry.pack(side=LEFT)
-
-button1 = Button(frame1, text="Add", bg="#F5EFE8", font=("Arial", 12), command=add_task)
-button1.pack(side=LEFT, padx=10)
-
-button2 = Button(frame1, text="Edit", bg="#F5EFE8", font=("Arial", 12), command=edit_task)
-button2.pack(side=LEFT)
-
-button3 = Button(frame1, text="Delete", bg="#F5EFE8", font=("Arial", 12), command=delete_task)
-button3.pack(side=LEFT, padx=10)
-
-frame2 = Frame(root, bg="#F5EFE8")
-frame2.pack(pady=10)
-
-label2 = Label(frame2, text="To-Do List:", bg="#F5EFE8", font=("Arial", 12))
-label2.pack(side=LEFT, padx=10)
-
-scrollbar = Scrollbar(frame2)
-scrollbar.pack(side=RIGHT, fill=Y)
-
-listbox = Listbox(frame2, width=50, height=10, font=("Arial", 12), yscrollcommand=scrollbar.set)
-listbox.pack(side=LEFT)
-
-scrollbar.config(command=listbox.yview)
-
-root.mainloop()
+  <script>
+    function addTask() {
+      var taskInput = document.getElementById('taskInput');
+      var taskList = document.getElementById('taskList');
+      var newTask = document.createElement('div');
+      newTask.className = 'taskItem';
+      newTask.textContent = taskInput.value;
+      taskList.appendChild(newTask);
+      taskInput.value = '';
+      newTask.onclick = function() {
+        this.remove();
+      }
+    }
+  </script>
+</body>
+</html>
